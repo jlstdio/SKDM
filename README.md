@@ -1,2 +1,2 @@
 # VKDM
-Vibration based Keyboard Decoding Model
+Vibration based Keyboard input Decoding Model
