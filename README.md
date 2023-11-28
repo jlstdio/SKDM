@@ -1,6 +1,8 @@
 # Mobile sensor based keyboard decoding model (Acc, Audio)
 Using accelerometer and mircophone data to decode victim's keyboard input without any electronic hacking.
 
+# Data & Experiment data will be announced shortly
+
 ## How it works?
 TBA
 
