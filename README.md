@@ -1,39 +1,61 @@
 # Mobile sensor based keyboard decoding model (Acc, Audio)
-Using accelerometer and mircophone data to decode victim's keyboard input without any electronic hacking.
+Using accelerometer and microphone data to decode victim's keyboard input without any electronic hacking.
 
-# Data & Experiment data will be announced shortly
+- I'm not going to open data sets and exact methods directly to prevent exploit usage of method.
 
 ## How it works?
-TBA
+<img width="500" alt="introduction" src="https://github.com/JoonLee-K/SKDM/assets/35446381/239a0a94-ed0b-4397-ade6-333495077972">
+
+### Training phase
+Record vibration & audio of the nearby device with a keypad using a smartphone.
+
+from 0 to 9 and 'z', 'x', 'c', 'v', total of 14 classes of keyboard data is collected.
+
+MacBook Pro, Macbook Air, Gaming Laptop, Wireless keyboard are used. Cafe noise and silent noise are combined.
+
+Run through feature extractor & neural net to train.
+
+### Test phase
+Split data for test & validation is used for testing.
+
+### Real-world usage
+TBA, Demonstration of the project will be announced shortly
+
 
 ## Finding a right picking place
-TBA
+<img width="500" alt="Screenshot 2023-11-28 at 17 53 11" src="https://github.com/JoonLee-K/SKDM/assets/35446381/36de7385-7db2-4a08-a047-ef68c21a290e">
 
-## Data preparation
-TBA
+by comparing acc & audio data in plot I found that upper part of the laptop picks the most sharp edges of data
 
-## files & data download
-Full dataset & codes are down below
-Link : https://drive.google.com/drive/folders/1bn99L3aeaEJMU354ZHrfB2t-6j78ompR?usp=sharing
+## Data Preparation
+### Record data
+<img width="300" alt="data collection" src="https://github.com/JoonLee-K/SKDM/assets/35446381/975d1c5f-c2b6-4061-a29c-7bda239b0e75">
 
-## train & predict
-### pytorch 사용하기 (빠름)
-- 학습에 필요한 데이터는 `keyboard_tap_full.csv`에 있습니다. 필요에 따라 dir을 수정해주세요.
+I've collected data using [Sensor Logger](https://play.google.com/store/apps/details?id=com.kelvin.sensorapp&hl=ko&gl=US)application. Turn audio & accelerometer data option on.
 
-- 사용법
-`main.py`를 실행합니다.
+### Split data
+<img width="500" alt="data preparation" src="https://github.com/JoonLee-K/SKDM/assets/35446381/dc9f0c29-46c8-44eb-bfba-c264f1f3917e">
 
-지정된 epoch(default : 100)후 자동으로 prediction을 진행합니다.
+### Feature Extraction
+<img width="500" alt="feature extraction" src="https://github.com/JoonLee-K/SKDM/assets/35446381/12e5c924-0427-4eec-b5dd-9125c0e0eb87">
 
-- trouble shooting
-가끔 `pandas.errors.ParserError: Error tokenizing data. C error: Expected 12 fields in line 12852, saw 23` 과 같은 에러가 발생합니다.
+for Accelerometer, Auto-Correlation, PSD, and FFT were used for feature extraction.
 
-원인을 찾지 못하였으나 해당 csv 파일을 열어서 line에 적힌 숫자에 해당되는 행을 지우면 해결됩니다.
+and for Audio, MFCC, and FFT were used.
 
-### homemadeCnn 사용하기 : numpy로만 만든 cnn (느림)
-`homemadeCnn.py`을 실행합니다.
+## Train & Test
+### neural net
+Inspired from [TapNet](https://arxiv.org/abs/2009.01469) we've made simple convolutional layers
 
-# file 설명
+### result
+<img width="300" alt="Screenshot 2023-11-28 at 18 02 13" src="https://github.com/JoonLee-K/SKDM/assets/35446381/7b2724b2-13f2-4b98-9419-6e4b01cf03e2">
+
+The best data is 93% accuracy.
+
+This model also had F1 score: 0.8990. Precision: 0.8812 and Recall: 0.9175
+
+
+# file description
 - util.py : 연산에 필요한 각종 함수가 있습니다. CSV에 쓰기 등이 있습니다
 - feature Extractor.py : 데이터에 대한 featureExtractor함수가 들어있습니다.
 - data Preprocess.py : raw 데이터를 1 stroke에 맞게 가공하고, feature extraction을 수행합니다
