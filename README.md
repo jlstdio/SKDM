@@ -1,9 +1,17 @@
-# Vibration based keyboard decoding model
-파일 및 데이터 활용 및 각 파일에 대한 설명입니다.
+# Mobile sensor based keyboard decoding model (Acc, Audio)
+Using accelerometer and mircophone data to decode victim's keyboard input without any electronic hacking.
+
+## How it works?
+TBA
+
+## Finding a right picking place
+TBA
+
+## Data preparation
+TBA
 
 ## files & data download
-다음 링크에서 받아주세요
-
+Full dataset & codes are down below
 Link : https://drive.google.com/drive/folders/1bn99L3aeaEJMU354ZHrfB2t-6j78ompR?usp=sharing
 
 ## train & predict
